@@ -1,0 +1,14 @@
+version: '3'
+services:
+    flask-react:
+      build: .
+      command: bash -c "python -m flask run --host=0.0.0.0 & npm start"
+      volumes:
+        - .:/home/app-user/app
+        - /home/app-user/app/node_modules
+      ports:
+        - "5000:5000"
+        - "8080:8080"
+      environment:
+        - FLASK_APP=app.py
+        - FLASK_DEBUG=1
