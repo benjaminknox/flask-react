@@ -11,7 +11,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'webkit-build'),
     publicPath: "http://localhost:8080/",
     filename: '[name].[chunkhash].js',
     chunkFilename: '[id].[chunkhash].js'
@@ -26,7 +26,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './webkit-build',
     host: '0.0.0.0',
   },
   watchOptions: {
@@ -35,7 +35,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('[name].[chunkhash].css'),
-    new ManifestRevisionPlugin(path.join('dist', 'manifest.json'), {
+    new ManifestRevisionPlugin(path.join('webkit-build', 'manifest.json'), {
       rootAssetPath: rootAssetPath,
       ignorePaths: ['/js', '/css','/scss']
     })

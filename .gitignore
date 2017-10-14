@@ -13,6 +13,12 @@ sdist
 develop-eggs
 .installed.cfg
 
+# exclude everything
+#webkit-build/*
+
+# exception to the rule
+!webkit-build/.gitkeep 
+
 # Installer logs
 pip-log.txt
 

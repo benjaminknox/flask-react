@@ -9,9 +9,9 @@ RUN useradd --user-group --create-home --shell /bin/false app-user ; \
 ENV HOME=/home/app-user
 ADD . $HOME/app
 
-RUN cd $HOME/app ; pip install -r .requirements ; chown app-user:app-user $HOME/* 
+RUN cd $HOME/app ; pip install -r .requirements ; chown -R app-user:app-user $HOME/*
 
 USER app-user
 WORKDIR $HOME/app
-RUN cd $HOME/app ; mkdir dist ; npm install
+RUN cd $HOME/app ; npm install
 

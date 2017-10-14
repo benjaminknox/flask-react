@@ -8,7 +8,7 @@ apiRoute = '/api/v1'
 
 app.config.update(
   DEBUG=True,
-  WEBPACK_MANIFEST_PATH='./dist/manifest.json'
+  WEBPACK_MANIFEST_PATH='./webkit-build/manifest.json'
 )
 
 webpack = Webpack()
