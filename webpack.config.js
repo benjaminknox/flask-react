@@ -26,8 +26,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/i, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/i, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.(js|jsx)$/i, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.sass$/i, loader: extractSASS.extract(['css-loader', 'sass-loader']) },
       { test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
           loaders: [
