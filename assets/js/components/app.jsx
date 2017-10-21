@@ -3,7 +3,7 @@ import React from 'react';
 export default class App extends React.Component {
   constructor() {
     super();
-    this.state = { page: [] };
+    this.state = { page: [], gif: "loading" };
   }
 
   componentDidMount() {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
         return result.json();
       })
       .then(response => {
-        this.setState({page: response});
+        this.setState({page: response, gif: "lines-of-code"});
       });
   }
 
@@ -21,6 +21,7 @@ export default class App extends React.Component {
       <div style={{textAlign: 'center'}}>
         <h1>{ this.state.page.header }</h1>
         <p>{ this.state.page.body }</p>
+        <div className={"gif " + this.state.gif}></div>
       </div>
     );
   }

@@ -1,4 +1,3 @@
-# FROM ubuntu:latest
 FROM node:8.6.0
 MAINTAINER Benjamin Knox "bknox.contact@gmail.com"
 RUN useradd --user-group --create-home --shell /bin/false app-user ; \

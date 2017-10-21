@@ -12,7 +12,7 @@ module.exports = {
       rootAssetPath + '/js/app.js'
     ],
     app_css: [
-      rootAssetPath + '/scss/app.sass'
+      rootAssetPath + '/sass/app.sass'
     ]
   },
   output: {
@@ -28,7 +28,13 @@ module.exports = {
     loaders: [
       { test: /\.js$/i, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/i, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.sass$/i, loader: extractSASS.extract(['css-loader', 'sass-loader']) }
+      { test: /\.sass$/i, loader: extractSASS.extract(['css-loader', 'sass-loader']) },
+      { test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
+          loaders: [
+              'file-loader?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
+              'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+          ]
+      }
     ]
   },
   devServer: {

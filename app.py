@@ -1,5 +1,6 @@
-from flask import Flask, render_template
 from flask_webpack import Webpack
+from flask import Flask, render_template
+
 from api.v1.basic import basic_route
 
 
@@ -13,7 +14,6 @@ app.config.update(
 
 webpack = Webpack()
 webpack.init_app(app)
- 
 
 @app.route('/')
 @app.route('/<section>')
@@ -22,4 +22,3 @@ def home(section="top"):
 
 # Register REST API routes
 app.register_blueprint(basic_route, url_prefix=apiRoute)
-
