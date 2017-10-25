@@ -1,2 +1,3 @@
-@function asset-url($path) 
+@function asset-url($path) {
   @return url('~!file-loader!' + $path);
+}
