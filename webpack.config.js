@@ -1,58 +1,57 @@
 const path = require('path');
-const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var node_modules = './node_modules',
+var node_modules = path.join(__dirname, 'node_modules');
     rootAssetPath = './assets',
-    extractSASS = new ExtractTextPlugin('[name].[chunkhash].css');
+    extractSASS = new MiniCssExtractPlugin('[name].[chunkhash].css'),
+    buildPath = path.join(__dirname, 'webkit-build'),
+    manifestPath = path.join(buildPath, 'manifest.json');
 
 module.exports = {
   entry: {
-    app_js: [
-      rootAssetPath + '/js/app.js'
-    ],
-    app_css: [
-      rootAssetPath + '/scss/app.scss'
-    ]
+    app_js: [ './js/app.js' ],
+    app_css: [ rootAssetPath + '/scss/app.scss' ]
   },
   output: {
-    path: path.resolve(__dirname, 'webkit-build'),
-    publicPath: "http://localhost:8080/",
+    path: buildPath,
+    publicPath: "/dist/",
     filename: '[name].[chunkhash].js',
     chunkFilename: '[id].[chunkhash].chunk'
   },
   resolve: {
-    extensions: ['.js', '.scss']
+    extensions: ['.js', '.scss'],
+    modules: [node_modules]
   },
+  resolveLoader:{
+    modules: [node_modules] },
   module: {
-    loaders: [
-      { test: /\.(js|jsx)$/i, loader: 'babel-loader', exclude: /node_modules/ },
-      {
-        test: /\.scss$/i,
-        loader: extractSASS.extract({
-          use: [{
-              loader: 'css-loader'
-            }, {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [
-                  path.resolve(__dirname, node_modules + '/foundation/scss/')
-                ]
-              }
-          }]
-        })
+    rules: [
+      { 
+        test: /\.(js|jsx)$/i,
+        exclude: /node_modules/,
+        use : [{
+          loader: 'babel-loader',
+          options: { presets: ['@babel/preset-react'] } 
+        }]
+      }, { test: /\.scss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
       },
-      { test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
-          loaders: [
-              'file-loader?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
-              'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
-          ]
-      }
+      { test: /\.(jpe?g|png|gif|eot|ttf|woff|woff2|otf|svg([\?]?.*))$/i,
+        loaders: [
+          'file-loader?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
+          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      },
     ]
-  },
-  devServer: {
-    contentBase: './webkit-build',
-    host: '0.0.0.0',
   },
   watchOptions: {
     aggregateTimeout: 300,
@@ -60,9 +59,9 @@ module.exports = {
   },
   plugins: [
     extractSASS,
-    new ManifestRevisionPlugin(path.join('webkit-build', 'manifest.json'), {
-      rootAssetPath: rootAssetPath,
-      ignorePaths: ['/js', '/scss']
+    new ManifestPlugin({
+      fileName: manifestPath,
+      publicPath: '/dist/',
     })
   ]
 };

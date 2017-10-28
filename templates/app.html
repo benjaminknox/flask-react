@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head lang="en">
-    <title>Knox.Pro</title>
-    {{ stylesheet_tag('app_css') | safe }}
+    <title>Flask React</title>
+    {{ webpack['app_css.css'] }}
   </head>
   <body>
     <div id="root"></div>
-    {{ javascript_tag('app_js') | safe }}
+    {{ webpack['app_js.js'] }}
   </body>
 </html>

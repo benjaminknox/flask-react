@@ -14,7 +14,7 @@ develop-eggs
 .installed.cfg
 
 # exclude everything
-#webkit-build/*
+webkit-build/*
 
 # exception to the rule
 !webkit-build/.gitkeep 

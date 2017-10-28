@@ -7,7 +7,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:5000/api/v1/basic`)
+    fetch(`/api/v1/basic`)
       .then(result => {
         return result.json();
       })

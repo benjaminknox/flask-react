@@ -1,2 +1,2 @@
-Flask==0.12.2
-Flask-Webpack==0.1.0
+Flask==1.1.1
+flask-webpackext==1.0.0

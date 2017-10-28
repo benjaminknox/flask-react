@@ -1,19 +1,21 @@
-from flask_webpack import Webpack
-from flask import Flask, render_template
+from flask_webpackext import FlaskWebpackExt
+from flask import Flask, render_template, send_from_directory
 
 from api.v1.basic import basic_route
 
-
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 apiRoute = '/api/v1'
 
 app.config.update(
   DEBUG=True,
-  WEBPACK_MANIFEST_PATH='./webkit-build/manifest.json'
+  WEBPACKEXT_MANIFEST_PATH='/home/app-user/app/webkit-build/manifest.json'
 )
 
-webpack = Webpack()
-webpack.init_app(app)
+FlaskWebpackExt(app)
+
+@app.route('/dist/<path:path>')
+def send_js(path):
+    return send_from_directory('webkit-build', path)
 
 @app.route('/')
 @app.route('/<section>')
