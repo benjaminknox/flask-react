@@ -42,17 +42,22 @@ module.exports = {
           }]
         })
       },
-      { test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
-          loaders: [
-              'file-loader?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
-              'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
-          ]
+      { test: /\.(jpe?g|png|gif|eot|ttf|woff|woff2|otf|svg([\?]?.*))$/i,
+        loaders: [
+          'file-loader?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
+          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
       }
     ]
   },
   devServer: {
     contentBase: './webkit-build',
     host: '0.0.0.0',
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   },
   watchOptions: {
     aggregateTimeout: 300,
