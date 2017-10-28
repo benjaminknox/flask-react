@@ -2,9 +2,9 @@ const path = require('path');
 const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var rootAssetPath = './assets';
-
-var extractSASS = new ExtractTextPlugin('[name].[chunkhash].css');
+var node_modules = './node_modules',
+    rootAssetPath = './assets',
+    extractSASS = new ExtractTextPlugin('[name].[chunkhash].css');
 
 module.exports = {
   entry: {
@@ -27,7 +27,21 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.(js|jsx)$/i, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.scss$/i, loader: extractSASS.extract(['css-loader', 'sass-loader']) },
+      {
+        test: /\.scss$/i,
+        loader: extractSASS.extract({
+          use: [{
+              loader: 'css-loader'
+            }, {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [
+                  path.resolve(__dirname, node_modules + '/foundation/scss/')
+                ]
+              }
+          }]
+        })
+      },
       { test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
           loaders: [
               'file-loader?context=' + rootAssetPath + '&name=[path][name].[hash].[ext]',
