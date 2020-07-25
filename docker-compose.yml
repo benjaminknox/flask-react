@@ -2,7 +2,7 @@ version: '3'
 services:
     flask-react:
       build: .
-      command: bash -c "npm start & while [ ! -f webkit-build/manifest.json ] ; do sleep 1 ; echo 'waiting for manifest.json from webkit' ; done ; python3 -m flask run --host=0.0.0.0"
+      command: bash -c "/home/app-user/app/run.sh"
       volumes:
         - .:/home/app-user/app
         - /home/app-user/app/node_modules
