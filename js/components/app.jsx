@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import DeveloperModeIcon from '@material-ui/icons/DeveloperMode';
-
+import Quill from './quill.jsx';
 
 const useStyles = makeStyles(theme => ({
   rounded: {
@@ -22,7 +22,13 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1),
     }
-  }
+  },
+  name: {
+    textAlign: 'center',
+    fontSize: '64px',
+    fontWeight: 'lighter'
+  },
+  articleItem: {textAlign: 'center', marginBottom: '30px'}
 }));
 
 export default function App() {
@@ -40,9 +46,11 @@ export default function App() {
         setGif("lines-of-code");
       });
   }
+  
   return (
     <div style={{maxWidth: '900px', margin:'0 auto'}}>
-      <Paper style={{textAlign: 'center'}}>
+      <h1 className={classes.name}>Flask React</h1>
+      <Paper className={classes.articleItem}>
         <Grid container>
           <Grid item md={6}>
           <h1>{ page.header }</h1>
@@ -66,6 +74,12 @@ export default function App() {
           </Grid>
         </Grid>
       </Paper>
+      <div className={classes.articleItem}>
+        <Quill />
+      </div>
+      <h2 className={classes.center}>
+        {page.footer}
+      </h2>
     </div>
   );
 }

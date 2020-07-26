@@ -2,7 +2,7 @@ const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var node_modules = path.join(__dirname, 'node_modules');
+let node_modules = path.join(__dirname, 'node_modules');
     rootAssetPath = './assets',
     extractSASS = new MiniCssExtractPlugin('[name].[chunkhash].css'),
     buildPath = path.join(__dirname, 'webkit-build'),
@@ -20,7 +20,7 @@ module.exports = {
     chunkFilename: '[id].[chunkhash].chunk'
   },
   resolve: {
-    extensions: ['.js', '.scss'],
+    extensions: ['.js', '.scss', '.css'],
     modules: [node_modules]
   },
   resolveLoader:{
@@ -34,7 +34,7 @@ module.exports = {
           loader: 'babel-loader',
           options: { presets: ['@babel/preset-react'] } 
         }]
-      }, { test: /\.scss$/i,
+      }, { test: /(\.scss|\.css)$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {

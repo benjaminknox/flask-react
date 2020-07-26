@@ -1,5 +1,5 @@
 html, body {
-  background: #CCC;
+  background: #EEE;
   font-family: "Butler";
   p {
     font-size: 20px;
@@ -24,5 +24,13 @@ h1 {
     background: asset-url('../images/lines-of-code.gif');
     width: 400px;
     height: 300px;
+  } 
+  
+  &.write {
+    background: asset-url('../images/write.gif');
+    width: calc(100% - 10px);
+    height: 180px;
+    background-size: 100% 100%;
+    opacity: 50%;
   } 
 }
