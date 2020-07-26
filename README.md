@@ -2,7 +2,7 @@
   Flask React
 </h1>
 
-Because getting started developing with flask and react can be easier, this boilerplate for developing a flask and react web apps exists. This is a docker-compose script that builds a flask API with a react front end. Live reload for both frameworks is automatically on, so you can get right to code an app.
+Because getting started developing web apps with flask and react can be easier, this boilerplate for developing them exists. This is a docker-compose script that builds a flask API with a react front end. Live reload for both frameworks is automatically on, so you can get right to coding an app.
 
 ![Flask React](./readme-files/flask-react.gif)
 
