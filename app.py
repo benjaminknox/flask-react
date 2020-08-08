@@ -1,5 +1,6 @@
-from flask_webpackext import FlaskWebpackExt
 from flask import Flask, render_template, send_from_directory
+from flask_webpackext import FlaskWebpackExt
+from database import db_session
 
 from api.v1.basic import basic_route
 
@@ -24,3 +25,7 @@ def home(section="top"):
 
 # Register REST API routes
 app.register_blueprint(basic_route, url_prefix=apiRoute)
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()

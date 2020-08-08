@@ -1,10 +1,9 @@
 import ReactQuill from 'react-quill';
 import React, { useState } from 'react';
+import 'react-quill/dist/quill.snow.css';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-
-import 'react-quill/dist/quill.snow.css';
 
 const useStyles = makeStyles(theme => ({
   quillWrapper: {
@@ -20,8 +19,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-let handleChange = (content, delta, source, editor) => {
-  console.log(editor);
+let editor = React.createRef();
+let changeTimeout;
+
+let handleChange = () => {
+  if(changeTimeout) {
+    clearTimeout(changeTimeout);
+  }
+  
+  changeTimeout = setTimeout(function() {
+    fetch(`/api/v1/save-editor`, {
+      method: 'POST',
+      body: JSON.stringify({editorContent: editor.current.getEditorContents()}),
+      headers: { 'Content-Type': 'application/json'}
+    });
+    clearTimeout(changeTimeout);
+  }, 300);
 }
 
 export default function Quill() {
@@ -72,10 +85,11 @@ export default function Quill() {
             <div className={"gif write"}></div>
           </Grid>
           <Grid item md={8}>
-            <ReactQuill value={content}
+            <ReactQuill ref={editor}
+                        value={content}
                         modules={toolbarOptions}
-                        onChange={handleChange}
-                        theme="snow" >
+                        onKeyUp={handleChange}
+                        theme="snow">
               <div className={classes.editor}></div>
             </ReactQuill>
           </Grid>
