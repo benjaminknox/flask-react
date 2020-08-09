@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Quill() {
+export default function Intro() {
   const classes = useStyles();
   const [page, setPage] = useState([]);
   const [gif, setGif] = useState("loading");
