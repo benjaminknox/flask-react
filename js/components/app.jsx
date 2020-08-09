@@ -33,7 +33,7 @@ export default function App() {
         <Quill />
       </div>
       <h2 className={classes.center}>
-        Cody By Benjamin Knox
+        Code By Benjamin Knox
       </h2>
     </div>
   );
