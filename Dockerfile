@@ -9,18 +9,23 @@ ENV TERM screen
 RUN useradd --user-group --create-home --shell /bin/false app-user ; \
     wget -qO - https://raw.githubusercontent.com/yarnpkg/releases/gh-pages/debian/pubkey.gpg | apt-key add -; \
     apt-get update ; \
-    apt-get install -y python3 python3-pip build-essential  autoconf libtool pkg-config nasm ; \
+    apt-get install -y python3 python3-venv python3-pip build-essential  autoconf libtool pkg-config nasm ; \
     rm -rf /var/lib/apt/lists/*
 
 ENV HOME=/home/app-user
-ADD . $HOME/app
-
+WORKDIR $HOME/app
 RUN chown -R app-user:app-user $HOME/*
-
 USER app-user
 
+COPY package*.json ./
 
-RUN cd $HOME/app ; pip3 install -r .requirements
-
-WORKDIR $HOME/app
 RUN npm install
+
+ENV VIRTUAL_ENV=/home/app-user/env
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY .requirements .
+RUN pip3 install -r .requirements
+
+ADD . $HOME/app
