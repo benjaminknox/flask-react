@@ -13,7 +13,4 @@ To use Flask React pull the repository and open the repository root, then run th
 docker-compose up
 ```
 
-You should be able to go to http://localhost:5000 to see the front end after the initial build finishes. It's that simple.
-
-
-The docker container is hosted here: `benjaminpknox/flask-react`
+You should be able to go to http://localhost:5001 to see the front end after the initial build finishes. It's that simple.
