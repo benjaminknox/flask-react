@@ -2,11 +2,11 @@
 <html>
   <head lang="en">
     <title>Flask React</title>
-    {{ webpack['app_css.css'] }}
-    {{ webpack['app_js.css'] }}
+    <link rel="stylesheet" href="{{ static_url_for('static', filename='app_css.css') }}" />
+    <link rel="stylesheet" href="{{ static_url_for('static', filename='app_js.css') }}" />
   </head>
   <body>
     <div id="root"></div>
-    {{ webpack['app_js.js'] }}
+    <script src="{{ static_url_for('static', filename='app_js.js') }}"></script>
   </body>
 </html>

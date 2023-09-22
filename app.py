@@ -1,18 +1,19 @@
 from flask import Flask, render_template, send_from_directory
-from flask_webpackext import FlaskWebpackExt
+from flask_static_digest import FlaskStaticDigest
 from database import db_session
 
 from api.v1.basic import basic_route
 
-app = Flask(__name__, static_url_path='')
+flask_static_digest = FlaskStaticDigest()
+
+app = Flask(__name__, static_url_path='/static')
 apiRoute = '/api/v1'
 
 app.config.update(
   DEBUG=True,
-  WEBPACKEXT_MANIFEST_PATH='/home/app-user/app/webkit-build/manifest.json'
 )
 
-FlaskWebpackExt(app)
+flask_static_digest.init_app(app)
 
 @app.route('/dist/<path:path>')
 def send_js(path):

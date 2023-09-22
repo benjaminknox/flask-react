@@ -14,10 +14,10 @@ develop-eggs
 .installed.cfg
 
 # exclude everything
-webkit-build/*
+static/*
 
 # exception to the rule
-!webkit-build/.gitkeep 
+!static/.gitkeep 
 
 # Installer logs
 pip-log.txt

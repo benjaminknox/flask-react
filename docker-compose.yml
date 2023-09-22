@@ -7,7 +7,7 @@ services:
         - .:/home/app-user/app
         - /home/app-user/app/node_modules
       ports:
-        - "5000:5000"
+        - "5001:5000"
       environment:
         - FLASK_APP=app.py
         - FLASK_DEBUG=1
