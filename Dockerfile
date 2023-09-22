@@ -20,7 +20,7 @@ COPY package*.json ./
 RUN chown -R app-user:app-user $HOME/*
 USER app-user
 
-RUN npm install --legacy-peer-deps
+RUN npm install
 
 ENV VIRTUAL_ENV=/home/app-user/env
 RUN python3 -m venv $VIRTUAL_ENV

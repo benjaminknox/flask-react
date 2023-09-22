@@ -1,32 +1,31 @@
 import ReactQuill from 'react-quill';
 import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
-import LocalCafeIcon from '@material-ui/icons/LocalCafe';
-import NewReleasesIcon from '@material-ui/icons/NewReleases';
-import DeveloperModeIcon from '@material-ui/icons/DeveloperMode';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import { styled } from '@mui/material/styles';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
+import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
 
-const useStyles = makeStyles(theme => ({
-  rounded: {
-    color: '#fff',
-    backgroundColor: '#1BB3A6',
-  },
-  center: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    justifyContent: 'center',
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
+const RoundedAvatar = styled(Avatar)`
+  color: #fff;
+  background-color: #1BB3A6;
+`;
+
+const Center = styled('div')(({ theme }) =>`
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    display: flex;
+
+    & > *: {
+      margin: ${theme.spacing(1)};
     }
-  }
-}));
+`);
 
 export default function Intro() {
-  const classes = useStyles();
   const [page, setPage] = useState([]);
   const [gif, setGif] = useState("loading");
 
@@ -50,17 +49,17 @@ export default function Intro() {
           <p>{ page.body }</p>
           <Divider variant="middle" />
           <p>{ page.tag }</p>
-          <div className={classes.center}>
-            <Avatar className={classes.rounded}>
+          <Center>
+            <RoundedAvatar>
               <DeveloperModeIcon />
-            </Avatar>
-            <Avatar className={classes.rounded}>
+            </RoundedAvatar>
+            <RoundedAvatar>
               <NewReleasesIcon />
-            </Avatar>
-            <Avatar className={classes.rounded}>
+            </RoundedAvatar>
+            <RoundedAvatar>
               <LocalCafeIcon />
-            </Avatar>
-          </div>
+            </RoundedAvatar>
+          </Center>
           </Grid>
           <Grid item md={6}>
           <div className={"gif " + gif}></div>

@@ -1,23 +1,23 @@
 import ReactQuill from 'react-quill';
 import React, { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles(theme => ({
-  quillWrapper: {
-    padding: '10px',
-    boxSizing: 'border-box'
-  },
-  editor: {
-    height: '300px',
-    '& p': {
-      fontSize: '12pt',
-      marginTop: '6px'
+const QuillWrapper = styled(Grid)`
+  padding: 10px;
+  box-sizing: border-box;
+`;
+
+const Editor = styled('div')`
+    height: '300px';
+
+    & p {
+      font-size: '12pt';
+      margin-top: '6px';
     }
-  },
-}));
+`;
 
 let editor = React.createRef();
 let changeTimeout;
@@ -38,7 +38,6 @@ let handleChange = () => {
 }
 
 export default function Quill() {
-  const classes = useStyles();
   const [content, setContent] = useState([]);
   const [page, setPage] = useState([]);
   
@@ -78,7 +77,7 @@ export default function Quill() {
   return (
     <div style={{maxWidth: '900px', margin:'10px auto 0'}}>
       <Paper style={{textAlign: 'center'}}>
-        <Grid container className={classes.quillWrapper}>
+        <QuillWrapper container>
           <Grid item md={4}>
             <h2>{ page.header }</h2>
             <p dangerouslySetInnerHTML={{ __html: page.body }}></p>
@@ -90,10 +89,10 @@ export default function Quill() {
                         modules={toolbarOptions}
                         onKeyUp={handleChange}
                         theme="snow">
-              <div className={classes.editor}></div>
+              <Editor></Editor>
             </ReactQuill>
           </Grid>
-        </Grid>
+        </QuillWrapper>
       </Paper>
     </div>
   );

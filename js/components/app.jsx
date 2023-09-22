@@ -1,40 +1,42 @@
 import Quill from './quill.jsx';
 import Intro from './intro.jsx';
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles(theme => ({
-  center: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    textAlign: 'center',
-    '& > *': {
-      margin: theme.spacing(1),
+const Center = styled('h2')(({ theme }) =>`
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    & > * {
+      margin: ${theme.spacing(1)};
     }
-  },
-  name: {
-    textAlign: 'center',
-    fontSize: '64px',
-    fontWeight: 'lighter'
-  },
-  articleItem: {textAlign: 'center', marginBottom: '30px'}
-}));
+`);
+
+const Name = styled('h1')`
+  text-align: center;
+  font-size: 64px;
+  font-weight: lighter;
+`;
+
+const ArticleItem = styled('div')`
+  text-align: center;
+  margin-bottom: 30px;
+`;
 
 export default function App() {
-  const classes = useStyles();
-  
   return (
     <div style={{maxWidth: '900px', margin:'0 auto'}}>
-      <h1 className={classes.name}>Flask React</h1>
-      <div className={classes.articleItem}>
+      <Name>Flask React</Name>
+      <ArticleItem>
         <Intro />
-      </div>
-      <div className={classes.articleItem}>
+      </ArticleItem>
+      <ArticleItem>
         <Quill />
-      </div>
-      <h2 className={classes.center}>
+      </ArticleItem>
+      <Center>
         Code By Benjamin Knox
-      </h2>
+      </Center>
     </div>
   );
 }
