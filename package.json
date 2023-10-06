@@ -13,7 +13,7 @@
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
     "braces": ">=2.3.1",
-    "css-loader": "^3.4.0",
+    "css-loader": "^6.8.1",
     "deep-extend": ">=0.5.1",
     "extend": ">=3.0.2",
     "file-loader": "^5.0.2",
